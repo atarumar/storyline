@@ -167,6 +167,19 @@ class Berita extends BaseController
             'data' => $model->where('news_id', $getData['news_id'])->first()
         ]);
     }
+    public function search()
+{
+    $keyword = $this->request->getVar('keyword');
+    $model = new ModelsBerita();
+
+    $data['results'] = $model
+        ->like('news_title', $keyword)
+        ->orLike('news_description', $keyword)
+        ->findAll();
+
+    return view('search_results', $data);
+}
+
 
     public function delete(){
         $model = new ModelsBerita;

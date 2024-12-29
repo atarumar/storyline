@@ -40,7 +40,7 @@ class Statistik extends BaseController
         ];
     
         // Load the Statistik view
-        return view('statistik_list', $data);
+        return view('statistik', $data);
     }
     
 

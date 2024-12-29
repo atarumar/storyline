@@ -24,10 +24,10 @@
                 <?php for ($i = 0; $i < 12; $i++): ?>
                     <tr>
                         <td><?= date('F', mktime(0, 0, 0, $i + 1, 1)) ?></td>
-                        <td><?= $data['1'][$i] ?? 0 ?></td>
-                        <td><?= $data['2'][$i] ?? 0 ?></td>
-                        <td><?= $data['3'][$i] ?? 0 ?></td>
-                        <td><?= $data['4'][$i] ?? 0 ?></td>
+                        <td><?= $data1[$i] ?? 0 ?></td>
+                        <td><?= $data2[$i] ?? 0 ?></td>
+                        <td><?= $data3[$i] ?? 0 ?></td>
+                        <td><?= $data4[$i] ?? 0 ?></td>
                     </tr>
                 <?php endfor; ?>
             </tbody>
