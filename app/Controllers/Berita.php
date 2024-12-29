@@ -192,4 +192,14 @@ class Berita extends BaseController
         $download = $this->response->download(WRITEPATH . 'uploads/foto/' . $data, null);
         return $download;
     }
+
+    public function index()
+{
+    $model = new ModelsBerita();
+    $data['beritaList'] = $model->orderBy('created_at', 'desc')->findAll();
+
+    return view('berita', $data);
 }
+
+}
+
