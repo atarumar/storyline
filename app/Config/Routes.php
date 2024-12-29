@@ -21,4 +21,4 @@ $routes->post('/hapus-berita', [Berita::class, 'delete'], ['filter' => 'authFilt
 $routes->get('berita', 'Berita::index');
 
 $routes->get('/foto/(:any)', [Berita::class, 'downloadfile']);
-$routes->get('/statistik', [Statistik::class, 'showAll'], ['filter' => 'authFilter']);
+$routes->get('/statistik', [Statistik::class, 'showAll']);
