@@ -26,3 +26,8 @@ $routes->get('/statistik', [Statistik::class, 'showAll']);
 $routes->get('/story/new', 'StoryController::index'); // For showing the new story form
 $routes->post('/story/save', 'StoryController::save'); // For saving a new story
 $routes->get('/story/list', 'StoryController::list'); // For listing all stories
+
+$routes->get('/login', 'Pengguna::loginForm');
+$routes->post('/masuk', 'Pengguna::masuk');
+$routes->get('/signup', 'Pengguna::daftarForm');
+$routes->post('/signup', 'Pengguna::daftar');

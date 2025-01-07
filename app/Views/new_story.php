@@ -63,6 +63,17 @@
             cursor: pointer;
         }
 
+        .add-image-btn {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
         .profile-avatar {
             width: 32px;
             height: 32px;
@@ -105,21 +116,29 @@
         .content::placeholder {
             color: #6b6b6b;
         }
-
-        .add-content {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 1px solid #6b6b6b;
-            color: #6b6b6b;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.5rem;
-            margin: 1rem 0;
-        }
     </style>
+    <script>
+        function insertImage() {
+            const imageInput = document.createElement('input');
+            imageInput.type = 'file';
+            imageInput.accept = 'image/*';
+            imageInput.onchange = () => {
+                const file = imageInput.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.maxWidth = '100%';
+                        img.style.marginTop = '1rem';
+                        document.querySelector('.editor').appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            imageInput.click();
+        }
+    </script>
 </head>
 <body>
     <nav class="nav">
@@ -137,10 +156,10 @@
         <form action="<?= base_url('/story/save') ?>" method="post">
             <?= csrf_field() ?>
             <input type="text" name="title" class="title" placeholder="Title">
-            <button type="submit" class="publish-btn">Publish</button>
+
+            <!-- Story Content Textarea -->
             <textarea name="content" class="content" placeholder="Tell your story..."></textarea>
         </form>
-
     </main>
 </body>
 </html>
