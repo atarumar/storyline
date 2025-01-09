@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
+  <title>Sign Up Page</title>
   <style>
     * {
       margin: 0;
@@ -118,42 +118,15 @@
     .underline {
       text-decoration: underline;
     }
-
-    /* Popup Styles */
-    .popup {
-      position: fixed;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #ffdddd;
-      color: #d8000c;
-      padding: 16px;
-      border: 1px solid #d8000c;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      font-size: 0.9rem;
-      display: none;
-    }
-
-    .popup.show {
-      display: block;
-    }
   </style>
 </head>
 <body>
-  <!-- Popup Message -->
-  <?php if (session()->getFlashdata('error')): ?>
-    <div class="popup show">
-      <?= session()->getFlashdata('error') ?>
-    </div>
-  <?php endif; ?>
-
   <div class="card">
     <div class="card-header">
-      <h1 class="card-title">Login</h1>
-      <p class="card-description">Enter your email and password to login to your account</p>
+      <h1 class="card-title">Sign Up</h1>
+      <p class="card-description">Create your account to start using the platform</p>
     </div>
-    <form action="<?= base_url('/masuk') ?>" method="POST">
+    <form action="<?= base_url('/signup') ?>" method="POST">
       <?= csrf_field() ?>
       <div class="form-group">
         <label for="email">Email</label>
@@ -161,26 +134,20 @@
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" placeholder="Choose a strong password" required>
+      </div>
+      <div class="form-group">
+        <label for="nama_lengkap">Full Name</label>
+        <input type="text" id="nama_lengkap" name="nama_lengkap" placeholder="Your full name" required>
       </div>
       <div class="card-footer">
-        <button type="submit" class="btn">Login</button>
+        <button type="submit" class="btn">Sign Up</button>
         <p class="text-sm text-center text-muted">
-          Don’t have an account? 
-          <a href="<?= base_url('/signup') ?>" class="text-primary underline">Sign up</a>
+          Already have an account? 
+          <a href="<?= base_url('/login') ?>" class="text-primary underline">Log in</a>
         </p>
       </div>
     </form>
   </div>
-
-  <script>
-    // Auto-hide popup after 3 seconds
-    setTimeout(() => {
-      const popup = document.querySelector('.popup');
-      if (popup) {
-        popup.classList.remove('show');
-      }
-    }, 3000);
-  </script>
 </body>
 </html>

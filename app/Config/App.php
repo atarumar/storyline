@@ -72,6 +72,10 @@ class App extends BaseConfig
      */
     public string $defaultLocale = 'en';
 
+    public $sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler';
+    public $sessionSavePath = WRITEPATH . 'session';
+
+
     /**
      * --------------------------------------------------------------------------
      * Negotiate Locale

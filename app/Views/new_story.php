@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Story - Medium</title>
+    <title>New Story - StoryLine</title>
     <style>
         * {
             margin: 0;
@@ -34,6 +34,27 @@
             align-items: center;
             gap: 1rem;
         }
+        .image-url {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        background-color: #f9f9f9;
+        }
+
+        .image-url::placeholder {
+        color: #6b7280;
+        font-style: italic;
+        }
+
+        .image-url:focus {
+        border-color: #1a8917;
+        outline: none;
+        background-color: #fff;
+        }
+
 
         .logo {
             font-weight: bold;
@@ -61,17 +82,6 @@
             border-radius: 20px;
             font-size: 0.9rem;
             cursor: pointer;
-        }
-
-        .add-image-btn {
-            background: #007bff;
-            color: #fff;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            margin-bottom: 1rem;
         }
 
         .profile-avatar {
@@ -117,48 +127,25 @@
             color: #6b6b6b;
         }
     </style>
-    <script>
-        function insertImage() {
-            const imageInput = document.createElement('input');
-            imageInput.type = 'file';
-            imageInput.accept = 'image/*';
-            imageInput.onchange = () => {
-                const file = imageInput.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.style.maxWidth = '100%';
-                        img.style.marginTop = '1rem';
-                        document.querySelector('.editor').appendChild(img);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-            imageInput.click();
-        }
-    </script>
 </head>
 <body>
     <nav class="nav">
         <div class="nav-left">
-            <a href="/" class="logo">Medium</a>
-            <span class="draft-status">Draft in Athharumar</span>
+            <a href="/articles" class="logo">StoryLine</a>
+            <span class="draft-status">Draft in <?= session()->get('user_name') ?? 'User' ?></span>
         </div>
         <div class="nav-right">
-            <button class="publish-btn">Publish</button>
-            <img src="/placeholder.svg" alt="Profile" class="profile-avatar">
+            <button type="submit" form="story-form" class="publish-btn">Publish</button>
         </div>
     </nav>
 
     <main class="editor">
-        <form action="<?= base_url('/story/save') ?>" method="post">
+        <form id="story-form" action="<?= base_url('/story/save') ?>" method="post">
             <?= csrf_field() ?>
-            <input type="text" name="title" class="title" placeholder="Title">
-
-            <!-- Story Content Textarea -->
-            <textarea name="content" class="content" placeholder="Tell your story..."></textarea>
+                <input type="hidden" name="story_id" value="<?= isset($story['story_id']) ? esc($story['story_id']) : '' ?>">
+                <input type="text" name="image_url" placeholder="Image URL" value="<?= isset($story) ? esc($story['image_url']) : '' ?>">
+                <input type="text" name="title" class="title" placeholder="Title" value="<?= isset($story['title']) ? esc($story['title']) : '' ?>" required>
+                <textarea name="content" class="content" placeholder="Tell your story..." required><?= isset($story['content']) ? esc($story['content']) : '' ?></textarea>
         </form>
     </main>
 </body>

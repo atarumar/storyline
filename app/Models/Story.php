@@ -18,6 +18,7 @@ class Story extends Model
         'content',
         'author_id',
         'status',
+        'image_url',
         'created_at',
         'updated_at'
     ];

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medium – Where good ideas find you.</title>
+    <title>StoryLine – Where good ideas find you.</title>
     <style>
         * {
             margin: 0;
@@ -154,30 +154,44 @@
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <a href="<?= base_url() ?>" class="logo">Medium</a>
-        <div class="nav-links">
-            <a href="<?= base_url('our-story') ?>" class="nav-link">Our story</a>
-            <a href="<?= base_url('membership') ?>" class="nav-link">Membership</a>
-            <a href="<?= base_url('write') ?>" class="nav-link">Write</a>
-            <a href="<?= base_url('signin') ?>" class="nav-link">Sign in</a>
-            <a href="<?= base_url('get-started') ?>" class="get-started">Get started</a>
-        </div>
-    </nav>
+<nav class="nav">
+    <a href="<?= base_url() ?>" class="logo">StoryLine</a>
+    <div class="nav-links">
+        
 
-    <main class="hero">
-        <div class="hero-content">
+        <?php if (session()->get('is_logged_in')): ?>
+            <!-- Show this section for signed-in users -->
+            
+            <a href="<?= base_url('/login') ?>" class="nav-link">Sign In</a>
+        <?php else: ?>
+            <!-- Show this section for unsigned users -->
+            <a href="<?= base_url('/login') ?>" class="nav-link">Sign in</a>
+            <a href="<?= base_url('/signup') ?>" class="get-started">Get started</a>
+        <?php endif; ?>
+    </div>
+</nav>
+
+<main class="hero">
+    <div class="hero-content">
+        <?php if (session()->get('is_logged_in')): ?>
+            <!-- Content for signed-in users -->
+            <h1 class="hero-title">Welcome back!</h1>
+            <p class="hero-subtitle">Start writing your next story or continue exploring ideas.</p>
+            <a href="<?= base_url('/login') ?>" class="start-reading">Write a story</a>
+        <?php else: ?>
+            <!-- Content for unsigned users -->
             <h1 class="hero-title">Human stories & ideas</h1>
             <p class="hero-subtitle">A place to read, write, and deepen your understanding</p>
-            <a href="<?= base_url('start-reading') ?>" class="start-reading">Start reading</a>
-        </div>
-        <div class="hero-image">
-    <img src="https://media.istockphoto.com/id/1461537129/photo/close-up-woman-hand-writing-on-notebook.jpg?s=612x612&w=0&k=20&c=1UPcoOpmYSCzeHAyOB92X4tgSIybR6p7m-yUqIjAlaA=" 
-         alt="Close-up of woman writing in notebook" 
-         class="decorative-image" 
-         aria-hidden="true">
-</div>
-    </main>
+            <a href="<?= base_url('/login') ?>" class="start-reading">Write Your Story</a>
+        <?php endif; ?>
+    </div>
+    <div class="hero-image">
+        <img src="https://media.istockphoto.com/id/1461537129/photo/close-up-woman-hand-writing-on-notebook.jpg?s=612x612&w=0&k=20&c=1UPcoOpmYSCzeHAyOB92X4tgSIybR6p7m-yUqIjAlaA=" 
+             alt="Close-up of woman writing in notebook" 
+             class="decorative-image" 
+             aria-hidden="true">
+    </div>
+</main>
 
     <footer class="footer">
         <a href="<?= base_url('help') ?>" class="footer-link">Help</a>

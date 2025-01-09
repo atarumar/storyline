@@ -27,7 +27,22 @@ $routes->get('/story/new', 'StoryController::index'); // For showing the new sto
 $routes->post('/story/save', 'StoryController::save'); // For saving a new story
 $routes->get('/story/list', 'StoryController::list'); // For listing all stories
 
-$routes->get('/login', 'Pengguna::loginForm');
-$routes->post('/masuk', 'Pengguna::masuk');
-$routes->get('/signup', 'Pengguna::daftarForm');
-$routes->post('/signup', 'Pengguna::daftar');
+$routes->get('/login', 'Pengguna::loginForm'); // For rendering the login view
+$routes->post('/masuk', 'Pengguna::masuk');    // For handling login submission
+$routes->get('/signup', 'Pengguna::daftarForm'); // For rendering the signup view
+$routes->post('/signup', 'Pengguna::daftar');    // For handling signup submission
+
+$routes->get('/articles', 'ArticleController::index'); // Display published articles
+$routes->get('/new-story', 'StoryController::index'); // Display the new story form
+$routes->post('/story/save', 'StoryController::save'); // Save the new story
+$routes->get('/articles/(:num)', 'ArticleController::show/$1');
+
+$routes->get('/settings', 'SettingsController::index');
+$routes->post('/settings/update', 'SettingsController::update');
+$routes->post('/settings/delete', 'SettingsController::delete'); // Delete account
+$routes->get('/logout', 'SettingsController::logout'); // Log out
+
+$routes->get('/story/edit/(:num)', 'StoryController::edit/$1'); // Show the edit form
+$routes->post('/story/update/(:num)', 'StoryController::update/$1'); // Handle the edit submission
+$routes->post('/story/save', 'StoryController::save');
+$routes->get('/story/delete/(:num)', 'StoryController::delete/$1');
